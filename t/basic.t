@@ -16,7 +16,7 @@ my $hid = HiD->new(
     layout_dir  => 't/corpus/layouts',
     destination => $dest->stringify,
     sass_source => 't/corpus/src/sass',
-    sass_output => $dest->stringify . 'css',
+    sass_output => $dest->stringify . '/css',
     plugins => [HiD::Generator::SASS->new],
 );
 
@@ -24,7 +24,7 @@ my $hid = HiD->new(
 # but it'll do for now
 $hid->publish;
 
-my $bogus = $dest->child('test.css');
+my $test = $dest->child('css/test.css');
 
 # ok -e $bogus, "now we should have a bogus css page...";
 
