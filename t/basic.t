@@ -15,8 +15,10 @@ my $hid = HiD->new(
     source      => 't/corpus/src',
     layout_dir  => 't/corpus/layouts',
     destination => $dest->stringify,
-    sass_source => 't/corpus/src/sass',
-    sass_output => $dest->stringify . '/css',
+    config => {
+      sass_source => 't/corpus/src/sass',
+      sass_output => $dest->stringify . '/css/', 
+    },
     plugins => [HiD::Generator::SASS->new],
 );
 
@@ -26,6 +28,6 @@ $hid->publish;
 
 my $test = $dest->child('css/test.css');
 
-# ok -e $bogus, "now we should have a bogus css page...";
+ok -e $test, "now we should have a bogus css page...";
 
-# is $bogus->slurp => "it's a start", 'with the right content';
+is $test->slurp => ".this{color:#fff}.this .is{color:#000}.this .is .a{color:#f00}.this .is .a .test{color:#666}", 'with the right content';
