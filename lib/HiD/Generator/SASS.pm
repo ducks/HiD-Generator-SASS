@@ -8,6 +8,8 @@ package HiD::Generator::SASS;
 
 use Moose;
 with 'HiD::Generator';
+use File::Find::Rule;
+use CSS::Sass;
 
 use 5.014;
 
@@ -18,18 +20,27 @@ use HiD::VirtualPage;
 =cut
 
 sub generate {
-  my( $self , $site ) = @_;
+  my($self, $site) = @_;
 
-  die "WAHAT";
+  my $sass_source = $site->config->{sass_source};
 
-  my $css_page = HiD::VirtualPage->new({
-    content         => "it's a start",
-    output_filename => $site->destination . '/bogus.css' ,
-  });
+  my $sass = CSS::Sass->new(
+    include_paths => [$sass_source],
+    output_style  => SASS_STYLE_COMPRESSED
+  );
 
-  $site->add_object( $css_page );
+  my $css;
 
-  $site->INFO( "* Transformed SASS files");
+  my @sass_files = File::Find::Rule->file()
+                                   ->name('*.scss')
+                                   ->in($sass_source);
+
+  foreach my $file (@sass_files) {
+    $css = $sass->compile_file($file);
+    $site->add_object($css->$css);
+  }
+
+  $site->INFO("* Transformed SASS files");
 }
 
 
