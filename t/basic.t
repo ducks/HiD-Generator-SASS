@@ -15,8 +15,8 @@ my $hid = HiD->new(
     source      => 't/corpus/src',
     layout_dir  => 't/corpus/layouts',
     destination => $dest->stringify,
-    config => {
-      sass_source => 't/corpus/src/sass',
+    sass => {
+      sass_sources => ['t/corpus/src/sass'],
       sass_output => $dest->stringify . '/css/', 
     },
     plugins => [HiD::Generator::SASS->new],
