@@ -36,7 +36,8 @@ sub generate {
 
     my $css_file = HiD::VirtualPage->new({
       content => $css,
-      output_filename => $site->config->{sass}{sass_output} .
+      output_filename => $site->destination .
+                         $site->config->{sass}{sass_output} .
                          $filename .
                          '.css'
     });
