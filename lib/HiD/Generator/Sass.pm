@@ -1,4 +1,4 @@
-package HiD::Generator::Sass;
+package Sass;
 
 # ABSTRACT: transform SASS files to CSS
 
@@ -19,30 +19,6 @@ use HiD::VirtualPage;
 =method generate
 
 =cut
-
-has sass_sources => (
-  is      => 'ro',
-  isa     => 'Str',
-  default => sub {
-    my($self, $site) = @_;
-
-    $site->config->{sass}{sass_sources} ? 
-    $site->config->{sass}{sass_sources} :
-    '/_sass/screen.scss' 
-  }
-);
-
-has sass_output => (
-  is      => 'ro',
-  isa     => 'Str',
-  default => sub {
-    my($self, $site) = @_;
-
-    $site->config->{sass}{sass_output} ? 
-    $site->config->{sass}{sass_output} :
-    '/css'
-  }
-);
 
 sub generate {
   my($self, $site) = @_;
