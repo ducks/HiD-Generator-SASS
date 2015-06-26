@@ -5,7 +5,7 @@ use Test::More tests => 1;
 
 use Path::Tiny;
 use HiD;
-use Sass;
+use HiD::Generator::Sass;
 use Data::Printer;
 
 my $dest = path('t/published/');
@@ -26,7 +26,7 @@ my $hid = HiD->new(
         sass_output => $dest->stringify . '/css/',
       },
     },
-    plugins => [Sass->new],
+    plugins => [HiD::Generator::Sass->new],
 );
 
 p $hid;

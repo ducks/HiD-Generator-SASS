@@ -1,4 +1,4 @@
-package Sass;
+package HiD::Generator::Sass;
 
 # ABSTRACT: transform SASS files to CSS
 
