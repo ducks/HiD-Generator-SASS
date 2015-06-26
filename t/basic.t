@@ -4,9 +4,8 @@ use warnings;
 use Test::More tests => 1;
 
 use Path::Tiny;
-use lib '/Users/ducks/devel/HiD/lib';
 use HiD;
-use Sass;
+use HiD::Generator::Sass;
 use Data::Printer;
 
 my $dest = path('t/published/');
@@ -27,10 +26,8 @@ my $hid = HiD->new(
         sass_output => '/css/',
       },
     },
-    plugins => [Sass->new],
+    plugins => [HiD::Generator::Sass->new],
 );
-
-p $hid;
 
 # TODO will also grab the tests in t.
 # but it'll do for now
