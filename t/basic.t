@@ -29,8 +29,6 @@ my $hid = HiD->new(
     plugins => [HiD::Generator::Sass->new],
 );
 
-p $hid;
-
 # TODO will also grab the tests in t.
 # but it'll do for now
 $hid->publish;
