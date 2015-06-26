@@ -4,7 +4,6 @@ use warnings;
 use Test::More tests => 1;
 
 use Path::Tiny;
-use lib '/Users/ducks/devel/HiD/lib';
 use HiD;
 use Sass;
 use Data::Printer;
