@@ -24,7 +24,7 @@ my $hid = HiD->new(
         sass_sources => [
           't/corpus/src/sass/test.scss'
         ],
-        sass_output => $dest->stringify . '/css/',
+        sass_output => '/css/',
       },
     },
     plugins => [Sass->new],
