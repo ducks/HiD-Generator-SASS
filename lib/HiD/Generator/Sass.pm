@@ -23,7 +23,7 @@ use HiD::VirtualPage;
 sub generate {
   my($self, $site) = @_;
 
-  my @sass_sources = @{ $site->config->{sass}{sass_sources} };
+  my @sass_sources = @{ $site->config->{sass}{sass_sources} || [] };
 
   my $sass = CSS::Sass->new(
     output_style  => SASS_STYLE_COMPRESSED
