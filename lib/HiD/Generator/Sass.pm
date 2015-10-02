@@ -1,6 +1,6 @@
 package HiD::Generator::Sass;
 
-# ABSTRACT: transform SASS files to CSS
+# ABSTRACT: Compile Sass files to CSS
 
 =head1 DESCRIPTION
 
@@ -26,7 +26,7 @@ sub generate {
   my @sass_sources = @{ $site->config->{sass}{sass_sources} || [] };
 
   my $sass = CSS::Sass->new(
-    output_style  => SASS_STYLE_COMPRESSED
+    output_style  => $site->config->{sass}{sass_style}
   );
 
   foreach my $file (@sass_sources) {
