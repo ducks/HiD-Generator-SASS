@@ -2,7 +2,13 @@ package HiD::Generator::Sass;
 
 # ABSTRACT: Compile Sass files to CSS
 
+=head1 SYNOPSIS
+
+TODO
+
 =head1 DESCRIPTION
+
+TODO
 
 =cut
 
@@ -25,9 +31,13 @@ sub generate {
 
   my @sass_sources = @{ $site->config->{sass}{sass_sources} || [] };
 
-  my $sass = CSS::Sass->new(
-    output_style  => $site->config->{sass}{sass_style}
-  );
+  my $sass_style;
+  $sass_style = eval $site->config->{sass}{sass_style} if $site->config->{sass}{sass_style};
+
+  # give it a default value is nothing is passed
+  $sass_style //= SASS_STYLE_NESTED;
+
+  my $sass = CSS::Sass->new( output_style  => $sass_style );
 
   foreach my $file (@sass_sources) {
     $site->INFO("* Compiling sass file - " . $file);

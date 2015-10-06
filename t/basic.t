@@ -8,20 +8,22 @@ use HiD;
 use HiD::Generator::Sass;
 use Data::Printer;
 
-my $dest = path('t/published/');
+chdir 't/corpus';
+
+my $dest = path('published/');
 
 unless ($dest->exists) {
   $dest->mkpath;
 }
 
 my $hid = HiD->new(
-    source      => 't/corpus/src',
-    layout_dir  => 't/corpus/layouts',
+    source      => 'src',
+    layout_dir  => 'layouts',
     destination => $dest->stringify,
     config => { 
       sass => {
         sass_sources => [
-          't/corpus/src/sass/test.scss'
+          'src/sass/test.scss'
         ],
         sass_output => '/css/',
       },
