@@ -2,7 +2,13 @@ package HiD::Generator::Sass;
 
 # ABSTRACT: Compile Sass files to CSS
 
+=head1 SYNOPSIS
+
+TODO
+
 =head1 DESCRIPTION
+
+TODO
 
 =cut
 
