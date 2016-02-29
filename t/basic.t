@@ -1,37 +1,35 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use Path::Tiny;
 use HiD;
 use HiD::Generator::Sass;
 
-my $dest = path('t/published/');
-$dest->mkpath;
+use Test::MockObject;
 
-my $hid = HiD->new(
-    source      => 't/corpus/src',
-    layout_dir  => 't/corpus/layouts',
-    destination => $dest->stringify,
-    config => { 
-      sass => {
-        sass_style => 'SASS_STYLE_COMPRESSED',
-        sass_sources => [
-          't/corpus/src/sass/test.scss'
-        ],
-        sass_output => '/css/',
-      },
-    },
-    plugins => [HiD::Generator::Sass->new],
-);
+my $dest = '/tmp/somewhere';
 
-# TODO will also grab the tests in t.
-# but it'll do for now
-$hid->publish;
+my @output;
 
-my $test = $dest->child('/css/test.css');
+my $mock_hid = Test::MockObject->new
+->set_always( config => {
+    sass => {
+        sources => [ 't/corpus/src/sass/test.scss' ],
+        output => 'css',
+    }
+})
+->set_always( destination => $dest )
+->set_true('INFO')
+->mock( add_object => sub{ push @output, $_[1] }); 
 
-ok -e $test, "now we should have a bogus css page...";
+HiD::Generator::Sass->generate($mock_hid);
 
-is $test->slurp => ".this{color:#fff}.this .is{color:#000}.this .is .a{color:#f00}.this .is .a .test{color:#666}\n", 'with the right content';
+is scalar @output, 1, "now we should have a bogus css page...";
+
+my $file = shift @output;
+
+is $file->output_filename => "$dest/css/test.css";
+
+like $file->content => qr/\.this\s*{\s*color:\s*#fff/, 'with the right content';
