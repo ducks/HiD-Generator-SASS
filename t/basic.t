@@ -7,17 +7,18 @@ use Path::Tiny;
 use HiD;
 use HiD::Generator::Sass;
 
-my $dest = path('_t/published/');
+my $dest = path('t/published/');
 $dest->mkpath;
 
 my $hid = HiD->new(
-    source      => '_t/corpus/src',
-    layout_dir  => '_t/corpus/layouts',
+    source      => 't/corpus/src',
+    layout_dir  => 't/corpus/layouts',
     destination => $dest->stringify,
     config => { 
       sass => {
+        sass_style => 'SASS_STYLE_COMPRESSED',
         sass_sources => [
-          '_t/corpus/src/sass/test.scss'
+          't/corpus/src/sass/test.scss'
         ],
         sass_output => '/css/',
       },
