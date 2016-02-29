@@ -63,10 +63,10 @@ sub generate {
 
     my $css_file = HiD::VirtualPage->new({
       content => $css,
-      output_filename => $site->destination .
-                         $site->config->{sass}{sass_output} .
-                         $filename .
-                         '.css'
+      output_filename => path( $site->destination,
+                         $site->config->{sass}{output}, 
+                         $filename .  '.css'
+                     )->stringify
     });
 
     $site->INFO("* Publishing $css_file");
