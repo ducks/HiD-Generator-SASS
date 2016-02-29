@@ -4,11 +4,27 @@ package HiD::Generator::Sass;
 
 =head1 SYNOPSIS
 
-TODO
+You will need to install the HiD::Generator::Sass.
+Then, add the HiD::Generator::Sass plugin to the list and set up
+the sass_sources input files and sass_output files.
+
+In F<_config.yml>:
+
+   config => {
+      sass => {
+        sass_sources => [
+          '_t/corpus/src/sass/test.scss'
+        ],
+        sass_output => '/css/',
+      },
+    },
+    plugins => [HiD::Generator::Sass->new],
 
 =head1 DESCRIPTION
 
-TODO
+HiD::Generator::Sass is a plugin for the HiD static blog system
+that uses the perl wrapper for libSass to compile your sass files
+into css.
 
 =cut
 
