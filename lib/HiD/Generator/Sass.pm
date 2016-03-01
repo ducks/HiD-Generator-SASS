@@ -65,11 +65,10 @@ sub generate {
       content => $css,
       output_filename => path( $site->destination,
                          $site->config->{sass}{output}, 
-                         $filename .  '.css'
-                     )->stringify
+                         $filename . '.css')->stringify
     });
 
-    $site->INFO("* Publishing $css_file");
+    $site->INFO("* Publishing $css_file->output_filename");
 
     $site->add_object($css_file);
   }
