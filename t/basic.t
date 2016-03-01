@@ -9,7 +9,7 @@ use HiD::Generator::Sass;
 
 use Test::MockObject;
 
-my $dest = '/tmp/somewhere';
+my $dest = 't/output';
 
 my @output;
 
