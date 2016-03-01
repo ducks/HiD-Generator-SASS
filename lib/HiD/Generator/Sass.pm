@@ -68,7 +68,7 @@ sub generate {
                          $filename . '.css')->stringify
     });
 
-    $site->INFO("* Publishing $css_file->output_filename");
+    $site->INFO("* Publishing " . $css_file->output_filename);
 
     $site->add_object($css_file);
   }
